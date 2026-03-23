@@ -16,7 +16,10 @@ newgrp docker
 ### 2. Run n8n
 
 ```bash
-docker run -d --name n8n --restart unless-stopped -p 5678:5678 \
+docker run -d --name n8n --restart unless-stopped \
+    -p 0.0.0.0:5678:5678 \
+    -e N8N_LISTEN_ADDRESS=0.0.0.0 \
+    -e N8N_SECURE_COOKIE=false \
     -v n8n_data:/home/node/.n8n \
     docker.n8n.io/n8nio/n8n
 ```
