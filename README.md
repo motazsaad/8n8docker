@@ -13,7 +13,7 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
-### 2. Run n8n
+### 2. Run n8n on a workstation 
 
 ```bash
 docker run -d --name n8n --restart unless-stopped \
@@ -23,6 +23,14 @@ docker run -d --name n8n --restart unless-stopped \
     -v n8n_data:/home/node/.n8n \
     docker.n8n.io/n8nio/n8n
 ```
+## Run n8n on locally 
+```bash
+docker run -d --name n8n --restart unless-stopped \
+    -p 5678:5678 \
+    -v n8n_data:/home/node/.n8n \
+    docker.n8n.io/n8nio/n8n
+```
+
 
 n8n will be available at **http://localhost:5678**
 
