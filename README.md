@@ -53,6 +53,26 @@ docker run -d --name flowise --restart unless-stopped \
 
 Flowise AI will be available at **http://localhost:3000**
 
+### 4. Run LangFlow on a workstation
+
+```bash
+docker run -d --name langflow --restart unless-stopped \
+    -p 0.0.0.0:7860:7860 \
+    -v langflow_data:/root/.langflow \
+    langflowai/langflow:latest
+```
+
+## Run LangFlow locally
+
+```bash
+docker run -d --name langflow --restart unless-stopped \
+    -p 7860:7860 \
+    -v langflow_data:/root/.langflow \
+    langflowai/langflow:latest
+```
+
+LangFlow will be available at **http://localhost:7860**
+
 ## Useful Commands
 
 ```bash
@@ -76,24 +96,35 @@ docker stop flowise
 # Restart Flowise AI
 docker restart flowise
 
+# Start/Stop LangFlow
+docker start langflow
+docker stop langflow
+
+# Restart LangFlow
+docker restart langflow
+
 # View logs
 docker logs -f n8n
 docker logs -f flowise
+docker logs -f langflow
 
 # Inspect container details (IP, mounts, env vars, etc.)
 docker inspect n8n
 docker inspect flowise
+docker inspect langflow
 
 # Check resource usage (CPU, memory)
-docker stats n8n flowise
+docker stats n8n flowise langflow
 
 # Open a shell inside the container
 docker exec -it n8n sh
 docker exec -it flowise sh
+docker exec -it langflow sh
 
 # Remove container (data is preserved in the volume)
 docker rm -f n8n
 docker rm -f flowise
+docker rm -f langflow
 
 # List volumes
 docker volume ls
@@ -101,4 +132,5 @@ docker volume ls
 # Remove the data volumes (WARNING: deletes all data)
 docker volume rm n8n_data
 docker volume rm flowise_data
+docker volume rm langflow_data
 ```
